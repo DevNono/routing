@@ -1,8 +1,8 @@
 // src/index.js
-var progressBar = document.querySelector("#progress-fill");
-var progressOn = true;
-if (loadBar == null) {
-  progressOn = false;
+window.progressBar = document.querySelector("#progress-fill");
+window.progressOn = true;
+if (window.loadBar == null) {
+  window.progressOn = false;
 }
 function src_default(Alpine) {
   Alpine.directive("routing", (el, { expression }, { evaluate }) => {
@@ -16,8 +16,8 @@ function get_base_url() {
   return getUrl.protocol + "//" + getUrl.host;
 }
 function progress(loaded, total) {
-  if (progressOn) {
-    progressBar.style.width = loaded / total * 100 + "%";
+  if (window.progressOn) {
+    window.progressBar.style.width = loaded / total * 100 + "%";
   }
 }
 async function change_page(url, idHTMLToReplace) {

@@ -1,7 +1,7 @@
-var progressBar = document.querySelector("#progress-fill");
-var progressOn = true;
-if(loadBar == null){
-    progressOn = false;
+window.progressBar = document.querySelector("#progress-fill");
+window.progressOn = true;
+if(window.loadBar == null){
+    window.progressOn = false;
 }
 
 export default function (Alpine) {
@@ -18,8 +18,8 @@ function get_base_url(){
 }
 
 function progress(loaded, total) {
-    if(progressOn){
-        progressBar.style.width = loaded/total*100 +'%';
+    if(window.progressOn){
+        window.progressBar.style.width = loaded/total*100 +'%';
     }
 }
 
