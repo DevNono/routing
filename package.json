@@ -1,0 +1,24 @@
+{
+    "name": "@devnono/routing",
+    "version": "0.1.0",
+    "description": "Routing in Alpine.js",
+    "author": {
+        "name": "Noé Landré",
+        "email": "noe.landre@sylfo.com",
+        "url": "https://noelandre.fr"
+    },
+    "scripts": {
+        "build": "node ./scripts/build.js"
+    },
+    "main": "dist/module.cjs.js",
+    "module": "dist/module.esm.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/devnono/routing"
+    },
+    "dependencies": {
+        "alpinejs": "^3.2.1",
+        "brotli-size": "^4.0.0",
+        "esbuild": "^0.12.14"
+    }
+}
