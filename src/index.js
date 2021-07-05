@@ -12,13 +12,14 @@ export default function (Alpine) {
     })
 }
 
+// get url base
 function get_base_url(){
     var getUrl = window.location;
     return getUrl .protocol + "//" + getUrl.host;
 }
 
 //Update progress bar
-function progress(loaded, total) {
+window.progress = function(loaded, total) {
     if(window.progressOn){
         window.progressBar.style.width = Math.round(loaded/total*100) +'%';
     }
