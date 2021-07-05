@@ -85,7 +85,7 @@ async function change_page(url, idHTMLToReplace){
     {
         onUploadProgress: (progressEvent) => {
             const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
-            
+            console.log("Progress: " + progressEvent.loaded + "/" + totalLength);
             if (totalLength !== null) {
                 window.progress(progressEvent.loaded, totalLength);
             }
@@ -96,9 +96,7 @@ async function change_page(url, idHTMLToReplace){
     }).then((response) => {
         return response.data;
     });
-
-    console.log("data: " + resp)
-
+    
     history.pushState(null, '', url);
 
     var el = document.createElement( 'html' );
