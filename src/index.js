@@ -1,10 +1,11 @@
 export default function (Alpine) {
-    window.progressBar = document.querySelector("#progress-fill");
-    window.progressOn = true;
-    if(window.progressBar == null){
-        window.progressOn = false;
-        console.log(window.progressBar);
-    }
+    //(replaced by axios-progress-bar)
+    // window.progressBar = document.querySelector("#progress-fill");
+    // window.progressOn = true;
+    // if(window.progressBar == null){
+    //     window.progressOn = false;
+    //     console.log(window.progressBar);
+    // }
 
     Alpine.directive('routing', (el, { expression }, { evaluate }) => {
         el.addEventListener('click', () => {
@@ -19,7 +20,7 @@ function get_base_url(){
     return getUrl .protocol + "//" + getUrl.host;
 }
 
-//Update progress bar (replcaed by axios-progress-bar)
+//Update progress bar (replaced by axios-progress-bar)
 // window.progress = function(loaded, total) {
 //     if(window.progressOn){
 //         window.progressBar.style.width = Math.round(loaded/total*100) +'%';

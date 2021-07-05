@@ -13,12 +13,6 @@ __export(exports, {
 
 // src/index.js
 function src_default(Alpine) {
-  window.progressBar = document.querySelector("#progress-fill");
-  window.progressOn = true;
-  if (window.progressBar == null) {
-    window.progressOn = false;
-    console.log(window.progressBar);
-  }
   Alpine.directive("routing", (el, { expression }, { evaluate }) => {
     el.addEventListener("click", () => {
       change_page(get_base_url() + evaluate(expression), "main");
