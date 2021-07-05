@@ -84,5 +84,5 @@ async function change_page(url, idHTMLToReplace){
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
 
-    progress(0, 1);
+    //progress(0, 1);
 }
