@@ -90,13 +90,18 @@ async function change_page(url, idHTMLToReplace){
                 window.progress(progressEvent.loaded, totalLength);
             }
         },
+
+        onDownloadProgress: function (progressEvent) {
+            console.log("Progress: " + progressEvent.loaded);
+        },
+
         validateStatus: function (status) {
             return status < 500; // Resolve only if the status code is less than 500
         }
     }).then((response) => {
         return response.data;
     });
-    
+
     history.pushState(null, '', url);
 
     var el = document.createElement( 'html' );

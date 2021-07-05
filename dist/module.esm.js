@@ -30,6 +30,9 @@ async function change_page(url, idHTMLToReplace) {
         window.progress(progressEvent.loaded, totalLength);
       }
     },
+    onDownloadProgress: function(progressEvent) {
+      console.log("Progress: " + progressEvent.loaded);
+    },
     validateStatus: function(status) {
       return status < 500;
     }
