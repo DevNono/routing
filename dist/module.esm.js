@@ -22,21 +22,26 @@ window.progress = function(loaded, total) {
   }
 };
 async function change_page(url, idHTMLToReplace) {
-  var resp = axios.get(url, {
+  var resp = await axios.get(url, {
     onUploadProgress: (progressEvent) => {
       const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader("content-length") || progressEvent.target.getResponseHeader("x-decompressed-content-length");
       if (totalLength !== null) {
         window.progress(progressEvent.loaded, totalLength);
       }
+    },
+    validateStatus: function(status) {
+      return status < 500;
     }
   }).then((response) => {
     return response.data;
   });
+  console.log("data: " + resp);
   history.pushState(null, "", url);
   var el = document.createElement("html");
   el.innerHTML = resp;
   var main = el.querySelector("div#" + idHTMLToReplace).innerHTML;
   document.querySelector("div#" + idHTMLToReplace).innerHTML = main;
+  progress(0, 1);
 }
 
 // builds/module.js

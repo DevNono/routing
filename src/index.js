@@ -81,7 +81,7 @@ async function change_page(url, idHTMLToReplace){
         console.error(error);
     }) */
 
-    var resp = axios.get(url,
+    var resp = await axios.get(url,
     {
         onUploadProgress: (progressEvent) => {
             const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
@@ -89,10 +89,15 @@ async function change_page(url, idHTMLToReplace){
             if (totalLength !== null) {
                 window.progress(progressEvent.loaded, totalLength);
             }
+        },
+        validateStatus: function (status) {
+            return status < 500; // Resolve only if the status code is less than 500
         }
     }).then((response) => {
         return response.data;
     });
+
+    console.log("data: " + resp)
 
     history.pushState(null, '', url);
 
@@ -101,5 +106,5 @@ async function change_page(url, idHTMLToReplace){
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
 
-    //progress(0, 1);
+    progress(0, 1);
 }
