@@ -16,23 +16,8 @@ function get_base_url() {
   var getUrl = window.location;
   return getUrl.protocol + "//" + getUrl.host;
 }
-window.progress = function(loaded, total) {
-  if (window.progressOn) {
-    window.progressBar.style.width = Math.round(loaded / total * 100) + "%";
-  }
-};
 async function change_page(url, idHTMLToReplace) {
   var resp = await axios.get(url, {
-    onUploadProgress: (progressEvent) => {
-      const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader("content-length") || progressEvent.target.getResponseHeader("x-decompressed-content-length");
-      console.log("Progress: " + progressEvent.loaded + "/" + totalLength);
-      if (totalLength !== null) {
-        window.progress(progressEvent.loaded, totalLength);
-      }
-    },
-    onDownloadProgress: function(progressEvent) {
-      console.log("Progress: " + progressEvent.loaded);
-    },
     validateStatus: function(status) {
       return status < 500;
     }
@@ -44,7 +29,6 @@ async function change_page(url, idHTMLToReplace) {
   el.innerHTML = resp;
   var main = el.querySelector("div#" + idHTMLToReplace).innerHTML;
   document.querySelector("div#" + idHTMLToReplace).innerHTML = main;
-  progress(0, 1);
 }
 
 // builds/module.js

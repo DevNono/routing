@@ -19,12 +19,12 @@ function get_base_url(){
     return getUrl .protocol + "//" + getUrl.host;
 }
 
-//Update progress bar
-window.progress = function(loaded, total) {
-    if(window.progressOn){
-        window.progressBar.style.width = Math.round(loaded/total*100) +'%';
-    }
-}
+//Update progress bar (replcaed by axios-progress-bar)
+// window.progress = function(loaded, total) {
+//     if(window.progressOn){
+//         window.progressBar.style.width = Math.round(loaded/total*100) +'%';
+//     }
+// }
 
 async function change_page(url, idHTMLToReplace){
     // old fetchAPI
@@ -83,18 +83,6 @@ async function change_page(url, idHTMLToReplace){
 
     var resp = await axios.get(url,
     {
-        onUploadProgress: (progressEvent) => {
-            const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
-            console.log("Progress: " + progressEvent.loaded + "/" + totalLength);
-            if (totalLength !== null) {
-                window.progress(progressEvent.loaded, totalLength);
-            }
-        },
-
-        onDownloadProgress: function (progressEvent) {
-            console.log("Progress: " + progressEvent.loaded);
-        },
-
         validateStatus: function (status) {
             return status < 500; // Resolve only if the status code is less than 500
         }
@@ -108,6 +96,4 @@ async function change_page(url, idHTMLToReplace){
     el.innerHTML = resp;
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
-
-    progress(0, 1);
 }
