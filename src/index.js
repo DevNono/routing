@@ -1,6 +1,6 @@
 window.progressBar = document.querySelector("#progress-fill");
 window.progressOn = true;
-if(window.loadBar == null){
+if(window.progressBar == null){
     window.progressOn = false;
 }
 
@@ -86,7 +86,7 @@ async function change_page(url, idHTMLToReplace){
             const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
             
             if (totalLength !== null) {
-                progress(progressEvent.loaded, totalLength);
+                window.progress(progressEvent.loaded, totalLength);
             }
         }
     }).then((response) => {
