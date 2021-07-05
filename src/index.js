@@ -5,7 +5,7 @@ export default function (Alpine) {
         window.progressOn = false;
         console.log(window.progressBar);
     }
-    
+
     Alpine.directive('routing', (el, { expression }, { evaluate }) => {
         el.addEventListener('click', () => {
             change_page(get_base_url() + evaluate(expression), 'main')
@@ -91,7 +91,7 @@ async function change_page(url, idHTMLToReplace){
             }
         }
     }).then((response) => {
-        return response;
+        return response.data;
     });
 
     history.pushState(null, '', url);

@@ -30,7 +30,7 @@ async function change_page(url, idHTMLToReplace) {
       }
     }
   }).then((response) => {
-    return response;
+    return response.data;
   });
   history.pushState(null, "", url);
   var el = document.createElement("html");
