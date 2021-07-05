@@ -17,14 +17,16 @@ function get_base_url(){
     return getUrl .protocol + "//" + getUrl.host;
 }
 
+//Update progress bar
 function progress(loaded, total) {
     if(window.progressOn){
-        window.progressBar.style.width = loaded/total*100 +'%';
+        window.progressBar.style.width = Math.round(loaded/total*100) +'%';
     }
 }
 
 async function change_page(url, idHTMLToReplace){
-    var resp = await fetch(url).then(response => {
+    // old fetchAPI
+    /* var resp = await fetch(url).then(response => {
         console.log(response);
         if (!response.ok) {
             throw Error(response.status+' '+response.statusText)
@@ -75,7 +77,20 @@ async function change_page(url, idHTMLToReplace){
     .then((response) => { return response.text(); })
     .catch(error => {
         console.error(error);
-    })
+    }) */
+
+    var resp = axios.get(url,
+    {
+        onUploadProgress: (progressEvent) => {
+            const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+            
+            if (totalLength !== null) {
+                progress(progressEvent.loaded, totalLength);
+            }
+        }
+    }).then((response) => {
+        return response;
+    });
 
     history.pushState(null, '', url);
 
