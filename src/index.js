@@ -90,7 +90,7 @@ function makeRequestCreator() {
             
             if(response.status == 302){
                 change_page(response.headers['Location'], idHTMLToReplace);
-                return null;
+                return;
             }
        
             return response;
