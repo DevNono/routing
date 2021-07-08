@@ -24,7 +24,7 @@ export default function (Alpine) {
             var method = el.getAttribute("method");
     
             var resp = await makeRequestCreator(url, method, formData);
-            if(resp != null){
+            if(resp != null && resp != undefined && resp != ''){
                 el._x_dataStack[0].errors = {};
                 if(resp.isAxiosError){
                     console.log(resp);
