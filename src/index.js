@@ -71,7 +71,7 @@ window.change_page = async function (url, idHTMLToReplace){
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
 
     // set title
-    document.head.querySelector('title').innerText = el.head.querySelector('title').innerText;
+    document.querySelector('title').innerText = el.querySelector('title').innerText;
 
     // add new styles
     var list_old = [];
