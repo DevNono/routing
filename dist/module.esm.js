@@ -52,7 +52,6 @@ window.change_page = async function(url, idHTMLToReplace2) {
   var el = document.createElement("html");
   el.innerHTML = resp;
   var main = el.querySelector("div#" + idHTMLToReplace2).innerHTML;
-  document.head.innerHTML = el.head.innerHTML;
   document.head.querySelector("title").innerText = el.head.querySelector("title").innerText;
   var list_old = [];
   document.querySelectorAll("link[rel=stylesheet]").forEach(function(el2) {

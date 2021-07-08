@@ -69,7 +69,6 @@ window.change_page = async function (url, idHTMLToReplace){
     var el = document.createElement( 'html' );
     el.innerHTML = resp;
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
-    document.head.innerHTML = el.head.innerHTML;
 
     // set title
     document.head.querySelector('title').innerText = el.head.querySelector('title').innerText;
