@@ -5,13 +5,11 @@ function src_default(Alpine) {
     el.addEventListener("click", () => {
       change_page(get_base_url() + evaluate(expression), idHTMLToReplace);
     });
-    console.log("test8");
   });
   Alpine.directive("ajax", (el) => {
     if (el.nodeName != "FORM") {
       return;
     }
-    console.log("test");
     el.addEventListener("submit", async (event) => {
       event.preventDefault();
       var formData = new FormData(el);
@@ -50,6 +48,7 @@ window.change_page = async function(url, idHTMLToReplace2) {
   el.innerHTML = resp;
   var main = el.querySelector("div#" + idHTMLToReplace2).innerHTML;
   document.querySelector("div#" + idHTMLToReplace2).innerHTML = main;
+  simpleBar.recalculate();
 };
 function makeRequestCreator() {
   var call;

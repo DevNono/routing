@@ -5,7 +5,6 @@ export default function (Alpine) {
         el.addEventListener('click', () => {
             change_page(get_base_url() + evaluate(expression), idHTMLToReplace)
         })
-        console.log('test8');
     })
 
     Alpine.directive('ajax', (el) => {
@@ -13,7 +12,6 @@ export default function (Alpine) {
             return;
         }
     
-        console.log('test');
         el.addEventListener('submit', async (event) => {
             // cancel normal submit
             event.preventDefault();
@@ -65,6 +63,8 @@ window.change_page = async function (url, idHTMLToReplace){
     el.innerHTML = resp;
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
+
+    simpleBar.recalculate();
 }
 
 function makeRequestCreator() {
