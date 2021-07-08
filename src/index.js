@@ -70,7 +70,7 @@ window.change_page = async function (url, idHTMLToReplace){
     }
 
     for (var link of el.querySelectorAll("link[rel=stylesheet]")) {
-        document.head.innerHTML += link;
+        document.head.appendChild(link);
     }
 
     // adding and reloading scripts
@@ -79,7 +79,7 @@ window.change_page = async function (url, idHTMLToReplace){
     }
 
     for (var script of el.querySelectorAll("script")) {
-        document.body.innerHTML += script;
+        document.body.appendChild(script);
     }
 }
 

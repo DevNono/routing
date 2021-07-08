@@ -52,13 +52,13 @@ window.change_page = async function(url, idHTMLToReplace2) {
     link.remove();
   }
   for (var link of el.querySelectorAll("link[rel=stylesheet]")) {
-    document.head.innerHTML += link;
+    document.head.appendChild(link);
   }
   for (var script of document.querySelectorAll("script")) {
     script.remove();
   }
   for (var script of el.querySelectorAll("script")) {
-    document.body.innerHTML += script;
+    document.body.appendChild(script);
   }
 };
 function makeRequestCreator() {
