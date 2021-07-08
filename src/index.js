@@ -23,8 +23,10 @@ export default function (Alpine) {
             var url = el.getAttribute("action").includes('http') ? el.getAttribute("action") : api_base_domain + el.getAttribute("action");
             var method = el.getAttribute("method");
     
-            var resp = await makeRequestCreator(url, method, formData);
-            if(resp != null && resp != undefined && resp != ''){
+            var get = makeRequestCreator();
+            var resp = get(url, method, formData);
+
+            if(resp != null){
                 el._x_dataStack[0].errors = {};
                 if(resp.isAxiosError){
                     console.log(resp);
@@ -90,7 +92,7 @@ function makeRequestCreator() {
             
             if(response.status == 302){
                 change_page(response.headers['Location'], idHTMLToReplace);
-                return;
+                return null;
             }
        
             return response;
