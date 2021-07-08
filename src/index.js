@@ -64,6 +64,7 @@ window.change_page = async function (url, idHTMLToReplace){
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
 
+    window.simpleBar = new SimpleBar(document.querySelector('.simpleBar'));
     simpleBar.recalculate();
 }
 

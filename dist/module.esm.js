@@ -48,6 +48,7 @@ window.change_page = async function(url, idHTMLToReplace2) {
   el.innerHTML = resp;
   var main = el.querySelector("div#" + idHTMLToReplace2).innerHTML;
   document.querySelector("div#" + idHTMLToReplace2).innerHTML = main;
+  window.simpleBar = new SimpleBar(document.querySelector(".simpleBar"));
   simpleBar.recalculate();
 };
 function makeRequestCreator() {
