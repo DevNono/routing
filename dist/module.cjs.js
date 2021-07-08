@@ -18,11 +18,13 @@ function src_default(Alpine) {
     el.addEventListener("click", () => {
       change_page(get_base_url() + evaluate(expression), idHTMLToReplace);
     });
+    console.log("test8");
   });
   Alpine.directive("ajax", (el) => {
     if (el.nodeName != "FORM") {
       return;
     }
+    console.log("test");
     el.addEventListener("submit", async (event) => {
       event.preventDefault();
       var formData = new FormData(el);
