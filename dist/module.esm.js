@@ -16,7 +16,7 @@ function src_default(Alpine) {
       var url = el.getAttribute("action").includes("http") ? el.getAttribute("action") : api_base_domain + el.getAttribute("action");
       var method = el.getAttribute("method");
       var get = makeRequestCreator();
-      var resp = get(url, method, formData);
+      var resp = await get(url, method, formData);
       if (resp != null) {
         el._x_dataStack[0].errors = {};
         if (resp.isAxiosError) {

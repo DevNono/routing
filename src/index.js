@@ -24,7 +24,7 @@ export default function (Alpine) {
             var method = el.getAttribute("method");
     
             var get = makeRequestCreator();
-            var resp = get(url, method, formData);
+            var resp = await get(url, method, formData);
 
             if(resp != null){
                 el._x_dataStack[0].errors = {};
