@@ -100,7 +100,7 @@ window.change_page = async function(url, idHTMLToReplace2) {
   }
   document.querySelector("div#" + idHTMLToReplace2).innerHTML = main;
 };
-function makeRequestCreator() {
+window.makeRequestCreator = function() {
   var call;
   return async function(url, method, formData = "") {
     if (call) {
@@ -135,7 +135,7 @@ function makeRequestCreator() {
       }
     });
   };
-}
+};
 
 // builds/module.js
 var module_default = src_default;
