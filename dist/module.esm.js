@@ -48,8 +48,18 @@ window.change_page = async function(url, idHTMLToReplace2) {
   el.innerHTML = resp;
   var main = el.querySelector("div#" + idHTMLToReplace2).innerHTML;
   document.querySelector("div#" + idHTMLToReplace2).innerHTML = main;
-  window.simpleBar = new SimpleBar(document.querySelector(".simpleBar"));
-  simpleBar.recalculate();
+  for (var link of document.querySelectorAll("link[rel=stylesheet]")) {
+    link.remove();
+  }
+  for (var link of el.querySelectorAll("link[rel=stylesheet]")) {
+    document.head.innerHTML += link;
+  }
+  for (var script of document.querySelectorAll("script")) {
+    script.remove();
+  }
+  for (var script of el.querySelectorAll("script")) {
+    document.body.innerHTML += script;
+  }
 };
 function makeRequestCreator() {
   var call;
