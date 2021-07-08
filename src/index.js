@@ -107,17 +107,10 @@ window.change_page = async function (url, idHTMLToReplace){
         document.querySelector('script[src="' + l + '"]').remove();
     }
 
-
-    // for (var link of el.querySelectorAll("link[rel=stylesheet]")) {
-    //     if(!link.getAttribute('href') in list){
-    //         document.head.appendChild(link);
-    //     }
-    // }
-
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
 }
 
-function makeRequestCreator() {
+window.makeRequestCreator = function () {
     var call;
     return async function(url, method, formData = '') {
         if (call) {
