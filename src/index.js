@@ -52,6 +52,13 @@ function get_base_url(){
     return getUrl .protocol + "//" + getUrl.host;
 }
 
+
+function list_diff(l1, l2){
+    return l1.filter( function( el ) {
+        return !l2.includes( el );
+    });
+}
+
 window.change_page = async function (url, idHTMLToReplace){
     var get = makeRequestCreator();
     var resp = await get(url, 'get');
@@ -62,25 +69,53 @@ window.change_page = async function (url, idHTMLToReplace){
     var el = document.createElement( 'html' );
     el.innerHTML = resp;
     var main = el.querySelector('div#' + idHTMLToReplace).innerHTML;
+    document.head.innerHTML = el.head.innerHTML;
+
+    // set title
+    document.head.querySelector('title').innerText = el.head.querySelector('title').innerText;
+
+    // add new styles
+    var list_old = [];
+    document.querySelectorAll("link[rel=stylesheet]").forEach(function(el){ list_old.push(el.getAttribute('href'));})
+    var list_new = [];
+    document.querySelectorAll("link[rel=stylesheet]").forEach(function(el){ list_new.push(el.getAttribute('href'));})
+
+    var toAdd = list_diff(list_new, list_old); 
+    var toRemove = list_diff(list_old, list_new); 
+
+    for (l in toAdd){
+        document.head.appendChild(el.querySelector('link[href="' + l + '"]'));
+    }
+
+    for (l in toRemove){
+        document.querySelector('link[href="' + l + '"]').remove();
+    }
+
+
+    var list_old = [];
+    document.querySelectorAll("script").forEach(function(el){ list_old.push(el.getAttribute('src'));})
+    var list_new = [];
+    document.querySelectorAll("script").forEach(function(el){ list_new.push(el.getAttribute('src'));})
+
+    var toAdd = list_diff(list_new, list_old); 
+    var toRemove = list_diff(list_old, list_new); 
+
+    for (l in toAdd){
+        document.head.appendChild(el.querySelector('script[src="' + l + '"]'));
+    }
+
+    for (l in toRemove){
+        document.querySelector('script[src="' + l + '"]').remove();
+    }
+
+
+    // for (var link of el.querySelectorAll("link[rel=stylesheet]")) {
+    //     if(!link.getAttribute('href') in list){
+    //         document.head.appendChild(link);
+    //     }
+    // }
+
     document.querySelector('div#' + idHTMLToReplace).innerHTML = main;
-
-    // adding and reloading style
-    for (var link of document.querySelectorAll("link[rel=stylesheet]")) {
-        link.remove();
-    }
-
-    for (var link of el.querySelectorAll("link[rel=stylesheet]")) {
-        document.head.appendChild(link);
-    }
-
-    // adding and reloading scripts
-    for (var script of document.querySelectorAll("script")) {
-        script.remove();
-    }
-
-    for (var script of el.querySelectorAll("script")) {
-        document.body.appendChild(script);
-    }
 }
 
 function makeRequestCreator() {
