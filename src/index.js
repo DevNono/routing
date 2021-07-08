@@ -82,11 +82,11 @@ window.change_page = async function (url, idHTMLToReplace){
     var toAdd = list_diff(list_new, list_old); 
     var toRemove = list_diff(list_old, list_new); 
 
-    for (l in toAdd){
+    for (var l of toAdd){
         document.head.appendChild(el.querySelector('link[href="' + l + '"]'));
     }
 
-    for (l in toRemove){
+    for (var l of toRemove){
         document.querySelector('link[href="' + l + '"]').remove();
     }
 
@@ -99,11 +99,11 @@ window.change_page = async function (url, idHTMLToReplace){
     var toAdd = list_diff(list_new, list_old); 
     var toRemove = list_diff(list_old, list_new); 
 
-    for (l in toAdd){
+    for (var l of toAdd){
         document.head.appendChild(el.querySelector('script[src="' + l + '"]'));
     }
 
-    for (l in toRemove){
+    for (var l of toRemove){
         document.querySelector('script[src="' + l + '"]').remove();
     }
 
