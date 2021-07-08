@@ -85,7 +85,7 @@ function makeRequestCreator() {
       }
     }).then((response) => {
       if (response.status == 302) {
-        change_page(response.headers["Location"], idHTMLToReplace);
+        change_page(response.data.data.redirect, idHTMLToReplace);
         return null;
       }
       return response;
