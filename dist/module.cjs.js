@@ -78,6 +78,7 @@ function makeRequestCreator() {
       data: formData,
       method,
       cancelToken: call.token,
+      maxRedirects: 0,
       validateStatus: function(status) {
         return status < 500;
       }

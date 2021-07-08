@@ -84,6 +84,7 @@ function makeRequestCreator() {
             data: formData,
             method: method,
             cancelToken: call.token,
+            maxRedirects: 0,
             validateStatus: function (status) {
                 return status < 500; // Resolve only if the status code is less than 500
             },
