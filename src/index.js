@@ -53,7 +53,8 @@ function get_base_url(){
 }
 
 window.change_page = async function (url, idHTMLToReplace){
-    var resp = await makeRequestCreator(url, 'get');
+    var get = makeRequestCreator();
+    var resp = await get(url, 'get');
     resp = resp.data;
 
     history.pushState(null, '', url);

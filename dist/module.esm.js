@@ -40,7 +40,8 @@ function get_base_url() {
   return getUrl.protocol + "//" + getUrl.host;
 }
 window.change_page = async function(url, idHTMLToReplace2) {
-  var resp = await makeRequestCreator(url, "get");
+  var get = makeRequestCreator();
+  var resp = await get(url, "get");
   resp = resp.data;
   history.pushState(null, "", url);
   var el = document.createElement("html");
